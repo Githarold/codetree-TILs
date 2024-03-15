@@ -4,9 +4,8 @@ def beautiful_num(n):
     if not n:
         return 1
 
-    numbers = [1, 2, 3, 4]
     count = 0
-    for num in numbers:
+    for num in range(1, 5):
         if n >= num:
             count += beautiful_num(n - num)
 
