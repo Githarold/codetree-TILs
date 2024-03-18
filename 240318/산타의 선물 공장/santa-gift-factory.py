@@ -16,7 +16,7 @@ def work1(w_max):
     global belts
     weight_sum = 0
     for i, belt in enumerate(belts):
-        if belt_info[i]:
+        if belt_info[i] and belt:
             if belt[0][1] <= w_max:
                 weight_sum += belt[0][1]
                 belt.popleft()
@@ -27,7 +27,7 @@ def work1(w_max):
 def work2(r_id):
     global belts
     for i, belt in enumerate(belts):
-        if belt_info[i]:
+        if belt_info[i] and belt:
             for b in list(belt):
                 if b[0] == r_id:
                     belt.remove(b)
@@ -38,7 +38,7 @@ def work2(r_id):
 def work3(f_id):
     global belts
     for i, belt in enumerate(belts):
-        if belt_info[i]:
+        if belt_info[i] and belt:
             belt_list = list(belt)
             belt_len = len(belt_list)
             for j, b in enumerate(belt_list):
