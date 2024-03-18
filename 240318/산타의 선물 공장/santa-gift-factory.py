@@ -52,9 +52,11 @@ def work3(f_id):
 def work4(b_num):
     global belts, belt_info
     remove_belt = b_num-1
-    add_belt = (remove_belt + 1) % m
     if belt_info[remove_belt]:
         belt_info[remove_belt] = False
+        add_belt = remove_belt
+        while not belt_info[add_belt]:
+            add_belt = (add_belt + 1) % m
         while belts[remove_belt]:
             belts[add_belt].append(belts[remove_belt].popleft())
         print(b_num)
