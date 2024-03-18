@@ -57,7 +57,7 @@ def work3(f_id):
             for j, b in enumerate(belt_list):
                 if b[0] == f_id:
                     for _ in range(j, belt_len):
-                        curr_belt.appendleft(belt.pop())
+                        curr_belt.appendleft(curr_belt.pop())
                     print(i+1)
                     return
 
