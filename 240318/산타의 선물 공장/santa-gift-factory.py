@@ -50,6 +50,7 @@ def work3(f_id):
     if belt_num is None:
         print(-1)
     else:
+        print(belt_num + 1)
         curr_belt = belts[belt_num]
         if belt_info[belt_num] and curr_belt:
             belt_list = list(curr_belt)
@@ -58,7 +59,6 @@ def work3(f_id):
                 if b[0] == f_id:
                     for _ in range(j, belt_len):
                         curr_belt.appendleft(curr_belt.pop())
-                    print(i+1)
                     return
 
 def work4(b_num):
