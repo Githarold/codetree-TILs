@@ -15,7 +15,7 @@ y, x = [n//2, n//2]
 answer = board[y][x]
 for i in ins:
     if i == "R":
-        dir_idx = (dir_idx + 1) % 3
+        dir_idx = (dir_idx + 1) % 4
     elif i == "L":
         dir_idx -= 1
         if dir_idx < 0:
