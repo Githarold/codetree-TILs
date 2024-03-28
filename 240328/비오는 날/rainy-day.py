@@ -20,7 +20,7 @@ def early(day1, day2):
     if flag:
         return day2
     else:
-        return day2
+        return day1
 
 rainy = None
 n = int(input().strip())
