@@ -1,25 +1,30 @@
-n, k = map(int, input().split())
-arr = sorted(list(map(int, input().split())))
+# 변수 선언 및 입력:
+n, k = tuple(map(int, input().split()))
+arr = list(map(int, input().split()))
 
-count = 0
+count = dict()
 
-for i in range(n - 2):
-    left, right = i + 1, n - 1
-    while left < right:
-        current_sum = arr[i] + arr[left] + arr[right]
-        if current_sum == k:
-            count += 1
-            left += 1
-            right -= 1
-            while left < right and arr[left] == arr[left - 1]:
-                count += 1
-                left += 1
-            while left < right and arr[right] == arr[right + 1]:
-                count += 1
-                right -= 1
-        elif current_sum < k:
-            left += 1
-        else:
-            right -= 1
+# 각 숫자가 몇 번씩 나왔는지를
+# hashmap에 기록해줍니다.
+for elem in arr:
+    if elem in count:
+        count[elem] += 1
+    else:
+        count[elem] = 1
 
-print(count)
+ans = 0
+# 배열을 앞에서부터 순회하며 쌍을 만들어줍니다.
+for i in range(n):
+    # 이미 순회한 적이 있는 숫자는 빼 버림으로서
+    # 같은 조합이 여러번 세어지는 걸 방지합니다.
+    count[arr[i]] -= 1
+
+    for j in range(i):
+        # 전처리를 해주었기 때문에 이미 순회한 적 있는 값은 hashmap에 없습니다.
+        # 이와 같은 방식으로 같은 조합이 중복되어 세어지는 걸 방지할 수 있습니다.
+        diff = k - arr[i] - arr[j]
+
+        if diff in count:
+            ans += count[diff]
+
+print(ans)
