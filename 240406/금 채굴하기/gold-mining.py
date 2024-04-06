@@ -1,5 +1,4 @@
 n, m = map(int, input().split())
-cost = [k*k + (k+1)*(k+1) for k in range(n//2+1)]
 
 board = []
 for _ in range(n):
