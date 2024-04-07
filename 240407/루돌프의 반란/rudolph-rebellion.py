@@ -1,11 +1,13 @@
 n, m, p, c, d = map(int, input().split())
 ry, rx = list(x-1 for x in map(int, input().split()))
-santa = []
+santa_dict = {}
 board = [[0] * n for _ in range(n)]
 for _ in range(p):
-    _, y, x = map(int, input().split())
-    santa.append([y-1, x-1])
+    num, y, x = map(int, input().split())
+    santa_dict[num] = [y-1, x-1]
     board[y-1][x-1] = 1
+
+santa = [santa_dict[i] for i in sorted(santa_dict)]
 
 stun = [False] * p
 out = [0] * p
