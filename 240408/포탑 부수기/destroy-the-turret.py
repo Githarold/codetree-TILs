@@ -28,7 +28,7 @@ def find_min():
                     if i + j > miny + minx:
                         update = True
                     elif i + j == miny + minx:
-                        if i > miny:
+                        if j > minx:
                             update = True
             if update:
                 min_power = board[i][j]
@@ -52,7 +52,7 @@ def find_max():
                     if i + j < maxy + maxx:
                         update = True
                     elif i + j == maxy + maxx:
-                        if i < maxy:
+                        if j < maxx:
                             update = True
             if update:
                 max_power = board[i][j]
@@ -63,6 +63,8 @@ def find_max():
 def attack_laser(si, sj, ei, ej):
     global board, attack
     damage = board[si][sj]
+    attack[si][sj] = True
+    attack[ei][ej] = True    
 
     flow = []
     def dfs(ti, tj, visit, order):
@@ -122,24 +124,27 @@ def turn_over():
                 board[i][j] += 1    
 
 for i in range(k):
+    
     miny, minx = find_min()
     maxy, maxx = find_max()
 
     board[miny][minx] += (m + n)
-    attack_info[miny][minx] = k+1
+    attack_info[miny][minx] = i+1
 
     attack_laser(miny, minx, maxy, maxx)
 
     count = 0
     for bo in board:
         for b in bo:
-            if b <= 0:
+            if b > 0:
                 count += 1
     
+    # if count == 1 or i == k - 1:
+    #     break
+
     if count == 1:
         break
 
-    if i < k - 1:
-        turn_over()
+    turn_over()
 
 print(max(max(row) for row in board))
