@@ -73,8 +73,6 @@ def attack_laser(si, sj, ei, ej):
 
         if [ti, tj] == [ei, ej]:
             flow.append(order[:])
-            visit[ti][tj] = False
-            order.pop()
             return
         
         for i in range(4):
@@ -82,9 +80,7 @@ def attack_laser(si, sj, ei, ej):
             
             if not visit[ni][nj] and board[ni][nj]:
                 dfs(ni, nj, visit, order)
-            
-        visit[ti][tj] = False
-        order.pop()
+                
         return
 
     visit = [[False] * m for _ in range(n)]
