@@ -138,9 +138,6 @@ for i in range(k):
         for b in bo:
             if b > 0:
                 count += 1
-    
-    # if count == 1 or i == k - 1:
-    #     break
 
     if count == 1:
         break
