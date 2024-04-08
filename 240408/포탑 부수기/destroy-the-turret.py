@@ -69,24 +69,17 @@ def attack_laser(si, sj, ei, ej):
     attack[ei][ej] = True    
 
     flow = []
-    def bfs(si, sj):
-        q = deque([(si, sj, [])])
-        visit = [[False] * m for _ in range(n)]
-        visit[si][sj] = True
+    def dfs(ti, tj, path):
+        if [ti, tj] == [ei, ej]:
+            flow.append(path + [[ti, tj]])
+            return
+        
+        for i in range(4):
+            ni, nj = (ti + dy[i]) % n, (tj + dx[i]) % m
+            if not [ni, nj] in path and board[ni][nj]:
+                dfs(ni, nj, path + [[ti, tj]])
 
-        while q:
-            ci, cj, path = q.popleft()
-            if [ci, cj] == [ei, ej]:
-                flow.append(path + [[ci, cj]])
-                continue
-
-            for i in range(4):
-                ni, nj = (ci + dy[i]) % n, (cj + dx[i]) % m
-                if not visit[ni][nj] and board[ni][nj]:
-                    visit[ni][nj] = True
-                    q.append((ni, nj, path + [[ci, cj]]))
-
-    bfs(si, sj)
+    dfs(si, sj, [])
     
     if flow:
         flow.sort(key=len)
