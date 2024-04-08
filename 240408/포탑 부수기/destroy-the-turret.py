@@ -1,3 +1,5 @@
+from collections import deque
+
 n, m, k = map(int, input().split())
 board = [list(map(int, input().split())) for _ in range(n)]
 
@@ -67,27 +69,27 @@ def attack_laser(si, sj, ei, ej):
     attack[ei][ej] = True    
 
     flow = []
-    def dfs(ti, tj, visit, order):
-        visit[ti][tj] = True
-        order.append([ti, tj])
+    def bfs(si, sj):
+        q = deque([(si, sj, [])])
+        visit = [[False] * m for _ in range(n)]
+        visit[si][sj] = True
 
-        if [ti, tj] == [ei, ej]:
-            flow.append(order[:])
-            return
-        
-        for i in range(4):
-            ni, nj = (ti + dy[i]) % n, (tj + dx[i]) % m
-            
-            if not visit[ni][nj] and board[ni][nj]:
-                dfs(ni, nj, visit, order)
-                
-        return
+        while q:
+            ci, cj, path = q.popleft()
+            if [ci, cj] == [ei, ej]:
+                flow.append(path + [[ci, cj]])
+                continue
 
-    visit = [[False] * m for _ in range(n)]
-    dfs(si, sj, visit, [])
+            for i in range(4):
+                ni, nj = (ci + dy[i]) % n, (cj + dx[i]) % m
+                if not visit[ni][nj] and board[ni][nj]:
+                    visit[ni][nj] = True
+                    q.append((ni, nj, path + [[ci, cj]]))
+
+    bfs(si, sj)
     
     if flow:
-        flow.sort(key = len)
+        flow.sort(key=len)
         select_flow = flow[0]
         for y, x in select_flow:
             attack[y][x] = True
