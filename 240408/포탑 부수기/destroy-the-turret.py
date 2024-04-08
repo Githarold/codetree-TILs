@@ -101,6 +101,7 @@ def attack_laser(si, sj, ei, ej):
         for i in range(8):
             ni, nj = (ei + ddy[i]) % n, (ej + ddx[i]) % m
             if board[ni][nj] and [ni, nj] != [si, sj]:
+                attack[ni][nj] = True
                 board[ni][nj] -= damage // 2
     
     board[ei][ej] -= damage
