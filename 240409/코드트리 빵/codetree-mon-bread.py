@@ -33,13 +33,17 @@ def go_ahead():
 
     for i in range(m):
         if not is_goal[i] and player[i] != [-1, -1]:
-            cur_dist = abs(player[i][0] - goal[i][0]) + abs(player[i][1] - goal[i][1])
+            min_dist = float('inf')
+            mi, mj = -1, -1
             for j in range(4):
                 ni, nj = player[i][0] + di[j], player[i][1] + dj[j]
                 if 0 <= ni < n and 0 <= nj < n and board[ni][nj] != -1:
                     new_dist = abs(ni - goal[i][0]) + abs(nj - goal[i][1])
-                    if new_dist < cur_dist:
-                        player[i] = [ni, nj]
+                    if new_dist < min_dist:
+                        min_dist = new_dist
+                        mi, mj = ni, nj
+
+            player[i] = [mi, mj]
 
 counter = 0
 while True:
