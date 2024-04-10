@@ -32,7 +32,7 @@ def lose_player(idx):
     global player, board
     i, j, d, s, g = player[idx]
     player[idx][4] = 0
-    heapq.heappush(board[i][j], g)
+    heapq.heappush(board[i][j], -g)
     for x in range(4):
         ni, nj = i + di[(d+x) % 4], j + dj[(d+x) % 4]
 
