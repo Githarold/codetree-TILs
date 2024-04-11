@@ -19,7 +19,9 @@ def move_runner():
 
         if abs(ti - i) + abs(tj - j) <= 3:
             ni, nj = i + di[d], j + dj[d]
-            if not (0 < ni <= n and 0 < nj <= n) or [ni, nj] == [ti, tj]:
+            if [ni, nj] == [ti, tj]:
+                continue
+            if not (0 < ni <= n and 0 < nj <= n):
                 ni, nj = i - di[d], j - dj[d]
                 d = (d + 2) % 4
             runner[idx] = [ni, nj, d]
@@ -38,7 +40,7 @@ def get_runner(k):
     return get_count * k
 
 answer = 0
-for step in range(k):
+for step in range(1, k+1):
     move_runner()
     cnt += 1
     ti, tj = ti + di[d], tj + dj[d]
@@ -57,7 +59,7 @@ for step in range(k):
                 max_cnt += val
             else:
                 flag = 1
-    
-    answer += get_runner(step+1)
+                
+    answer += get_runner(step)
 
 print(answer)
