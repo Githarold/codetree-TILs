@@ -19,11 +19,11 @@ def move_runner():
 
         if abs(ti - i) + abs(tj - j) <= 3:
             ni, nj = i + di[d], j + dj[d]
-            if [ni, nj] == [ti, tj]:
-                continue
             if not (0 < ni <= n and 0 < nj <= n):
                 ni, nj = i - di[d], j - dj[d]
                 d = (d + 2) % 4
+            if [ni, nj] == [ti, tj]:
+                continue                
             runner[idx] = [ni, nj, d]
 
 def get_runner(k):
