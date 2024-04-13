@@ -1,7 +1,7 @@
 m, t = map(int, input().split())
 pi, pj = list(x-1 for x in map(int, input().split()))
 monster = [list(x-1 for x in map(int, input().split())) for _ in range(m)]
-egg = set()
+egg = []
 dead = set()
 
 # 북, 북서, 서, 남서, 남, 남동, 동, 북동
@@ -56,7 +56,7 @@ def move_packman():
 for _ in range(t):
     # 1, 2
     for idx, (mi, mj, dr) in enumerate(monster):
-        egg.add((mi, mj, dr))
+        egg.append([mi, mj, dr])
 
         ni, nj = mi + di[dr], mj + dj[dr]
         count = 1
@@ -81,8 +81,8 @@ for _ in range(t):
         updated_dead.add((i, j, days-1))
     dead = updated_dead
 
-    for mi, mj, dr in egg:
-        monster.append([mi, mj, dr])
-    egg = set()
+    for e in egg:
+        monster.append(e)
+    egg = []
 
 print(len(monster))
